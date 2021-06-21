@@ -1,0 +1,13 @@
+D:\documents\microverse\cs\ConsoleApp1\bin\Debug\netcoreapp3.1\ConsoleApp1.exe
+D:\documents\microverse\cs\ConsoleApp1\bin\Debug\netcoreapp3.1\ConsoleApp1.deps.json
+D:\documents\microverse\cs\ConsoleApp1\bin\Debug\netcoreapp3.1\ConsoleApp1.runtimeconfig.json
+D:\documents\microverse\cs\ConsoleApp1\bin\Debug\netcoreapp3.1\ConsoleApp1.runtimeconfig.dev.json
+D:\documents\microverse\cs\ConsoleApp1\bin\Debug\netcoreapp3.1\ConsoleApp1.dll
+D:\documents\microverse\cs\ConsoleApp1\bin\Debug\netcoreapp3.1\ConsoleApp1.pdb
+D:\documents\microverse\cs\ConsoleApp1\obj\Debug\netcoreapp3.1\ConsoleApp1.AssemblyInfoInputs.cache
+D:\documents\microverse\cs\ConsoleApp1\obj\Debug\netcoreapp3.1\ConsoleApp1.AssemblyInfo.cs
+D:\documents\microverse\cs\ConsoleApp1\obj\Debug\netcoreapp3.1\ConsoleApp1.csproj.CoreCompileInputs.cache
+D:\documents\microverse\cs\ConsoleApp1\obj\Debug\netcoreapp3.1\ConsoleApp1.dll
+D:\documents\microverse\cs\ConsoleApp1\obj\Debug\netcoreapp3.1\ConsoleApp1.pdb
+D:\documents\microverse\cs\ConsoleApp1\obj\Debug\netcoreapp3.1\ConsoleApp1.genruntimeconfig.cache
+D:\documents\microverse\cs\ConsoleApp1\obj\Debug\netcoreapp3.1\ConsoleApp1.csproj.AssemblyReference.cache
