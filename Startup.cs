@@ -36,13 +36,22 @@ namespace ConsoleApp1
             new Cell(1, 0),
             new Cell(-1, 0)};
 
-        static string last_movement = ",,,,";
+        static string last_movement = ",,,,,";
         static bool black_king_move = false;
         static bool black_rock1_move = false;
         static bool black_rock2_move = false;
         static bool white_king_move = false;
         static bool white_rock1_move = false;
         static bool white_rock2_move = false;
+
+        static int next_black_queen = 2;
+        static int next_black_rock = 3;
+        static int next_black_bishop = 3;
+        static int next_black_knight = 3;
+        static int next_white_queen = 2;
+        static int next_white_rock = 3;
+        static int next_white_bishop = 3;
+        static int next_white_knight = 3;
 
 
         static string[,] cells = {
@@ -69,7 +78,7 @@ namespace ConsoleApp1
             {  "bk", new Cell(0,4) },
             {  "bb2", new Cell(0,5) },
             {  "bn2", new Cell(0,6) },
-            {  "br2", new Cell(0,7) },
+            //{  "br2", new Cell(0,7) },
             {  "bp1", new Cell(1,0) },
             {  "bp2", new Cell(1,1) },
             {  "bp3", new Cell(1,2) },
@@ -77,7 +86,7 @@ namespace ConsoleApp1
             {  "bp5", new Cell(1,4) },
             {  "bp6", new Cell(1,5) },
             {  "bp7", new Cell(1,6) },
-            {  "bp8", new Cell(1,7) },
+            //{  "bp8", new Cell(1,7) },
         };
 
         static Dictionary<string, Cell> whitePieces = new Dictionary<string, Cell>
@@ -89,7 +98,7 @@ namespace ConsoleApp1
             {  "wp5", new Cell(6,4) },
             {  "wp6", new Cell(6,5) },
             {  "wp7", new Cell(6,6) },
-            {  "wp8", new Cell(6,7) },
+            {  "wp8", new Cell(1,7) },
             {  "wr1", new Cell(7,0) },
             {  "wn1", new Cell(7,1)  },
             {  "wb1", new Cell(7,2)  },
@@ -184,18 +193,18 @@ namespace ConsoleApp1
                     tempCells[king.y + kingMovement.y, king.x + kingMovement.x] = "bk";
                     if (!black_king_attacked(new Cell(king.y + kingMovement.y, king.x + kingMovement.x)))
                     {
-                        availableMovements.Add($"bk,{king.y + kingMovement.y},{king.x + kingMovement.x}");
+                        availableMovements.Add($"bk,{king.y},{king.x},bk,{king.y + kingMovement.y},{king.x + kingMovement.x}");
                     }
                 }
             }
             tempCells = (string[,])cells.Clone();
             if (!black_king_move && !black_rock1_move && cells[0,1]=="" && cells[0, 2] == "" && cells[0, 3] == "" && !black_king_attacked(new Cell(king.y, king.x)) && !black_king_attacked(new Cell(king.y, king.x-1)) && !black_king_attacked(new Cell(king.y, king.x - 2)))
             {
-                availableMovements.Add($"bk,{king.y},{king.x - 2}");
+                availableMovements.Add($"bk,{king.y},{king.x},bk,{king.y},{king.x - 2}");
             }
             if (!black_king_move && !black_rock2_move && cells[0, 5] == "" && cells[0, 6] == "" && !black_king_attacked(new Cell(king.y, king.x)) && !black_king_attacked(new Cell(king.y, king.x + 1)) && !black_king_attacked(new Cell(king.y, king.x + 2)))
             {
-                availableMovements.Add($"bk,{king.y},{king.x + 2}");
+                availableMovements.Add($"bk,{king.y},{king.x},bk,{king.y},{king.x + 2}");
             }
             return availableMovements;
         }
@@ -218,7 +227,7 @@ namespace ConsoleApp1
                     tempCells[knight.y + knightMovement.y, knight.x + knightMovement.x] = "bn";
                     if (!black_king_attacked(new Cell(king.y, king.x)))
                     {
-                        availableMovements.Add($"{piece},{knight.y + knightMovement.y},{knight.x + knightMovement.x}");
+                        availableMovements.Add($"{piece},{knight.y},{knight.x},{piece},{knight.y + knightMovement.y},{knight.x + knightMovement.x}");
                     }
                 }
                 
@@ -236,7 +245,11 @@ namespace ConsoleApp1
                 tempCells = (string[,])cells.Clone();
                 tempCells[pawn.y, pawn.x] = "";
                 tempCells[pawn.y+1, pawn.x] = "bp";
-                if(!black_king_attacked(new Cell(king.y, king.x))) availableMovements.Add($"{piece},{pawn.y + 1},{pawn.x}");
+                if(!black_king_attacked(new Cell(king.y, king.x)))
+                {
+                    if(pawn.y+1<7) availableMovements.Add($"{piece},{pawn.y},{pawn.x},{piece},{pawn.y + 1},{pawn.x}");
+                    else available_promotion_moves(piece, pawn.y, pawn.x, pawn.y + 1, pawn.x, availableMovements);
+                }
             }
             if (pawn.y == 1)
             {
@@ -246,7 +259,7 @@ namespace ConsoleApp1
                     tempCells = (string[,])cells.Clone();
                     tempCells[pawn.y, pawn.x] = "";
                     tempCells[pawn.y + 2, pawn.x] = "bp";
-                    if (!black_king_attacked(new Cell(king.y, king.x))) availableMovements.Add($"{piece},{pawn.y + 2},{pawn.x}");
+                    if (!black_king_attacked(new Cell(king.y, king.x))) availableMovements.Add($"{piece},{pawn.y},{pawn.x},{piece},{pawn.y + 2},{pawn.x}");
                 }
             }
             nCell = valid_position(pawn.y + 1, pawn.x+1);
@@ -255,7 +268,11 @@ namespace ConsoleApp1
                 tempCells = (string[,])cells.Clone();
                 tempCells[pawn.y, pawn.x] = "";
                 tempCells[pawn.y + 1, pawn.x+1] = "bp";
-                if (!black_king_attacked(new Cell(king.y, king.x))) availableMovements.Add($"{piece},{pawn.y + 1},{pawn.x + 1}");
+                if (!black_king_attacked(new Cell(king.y, king.x)))
+                {
+                    if(pawn.y+1<7) availableMovements.Add($"{piece},{pawn.y},{pawn.x},{piece},{pawn.y + 1},{pawn.x + 1}");
+                    else available_promotion_moves(piece, pawn.y, pawn.x, pawn.y + 1, pawn.x + 1, availableMovements);
+                }
             }
             nCell = valid_position(pawn.y + 1, pawn.x - 1);
             if (Regex.Match(nCell, @"^w").Success)
@@ -263,26 +280,32 @@ namespace ConsoleApp1
                 tempCells = (string[,])cells.Clone();
                 tempCells[pawn.y, pawn.x] = "";
                 tempCells[pawn.y + 1, pawn.x - 1] = "bp";
-                if (!black_king_attacked(new Cell(king.y, king.x))) availableMovements.Add($"{piece},{pawn.y + 1},{pawn.x - 1}");
+                if (!black_king_attacked(new Cell(king.y, king.x)))
+                {
+                    if (pawn.y + 1 < 7) availableMovements.Add($"{piece},{pawn.y},{pawn.x},{piece},{pawn.y + 1},{pawn.x - 1}");
+                    else available_promotion_moves(piece, pawn.y, pawn.x, pawn.y + 1, pawn.x - 1, availableMovements);
+                }
             }
-            if (last_movement == $"wp,{pawn.y+2},{pawn.x+1},{pawn.y},{pawn.x + 1}")
+            if (last_movement == $"wp,{pawn.y+2},{pawn.x+1},wp,{pawn.y},{pawn.x + 1}")
             {
                 tempCells = (string[,])cells.Clone();
                 tempCells[pawn.y, pawn.x] = "";
                 tempCells[pawn.y, pawn.x+1] = "";
                 tempCells[pawn.y + 1, pawn.x + 1] = "bp";
-                if (!black_king_attacked(new Cell(king.y, king.x))) availableMovements.Add($"{piece},{pawn.y + 1},{pawn.x + 1}");
+                if (!black_king_attacked(new Cell(king.y, king.x))) availableMovements.Add($"{piece},{pawn.y},{pawn.x},{piece},{pawn.y + 1},{pawn.x + 1}");
             }
-            if (last_movement == $"wp,{pawn.y + 2},{pawn.x - 1},{pawn.y},{pawn.x - 1}")
+            if (last_movement == $"wp,{pawn.y + 2},{pawn.x - 1},wp,{pawn.y},{pawn.x - 1}")
             {
                 tempCells = (string[,])cells.Clone();
                 tempCells[pawn.y, pawn.x] = "";
                 tempCells[pawn.y, pawn.x - 1] = "";
                 tempCells[pawn.y + 1, pawn.x - 1] = "bp";
-                if (!black_king_attacked(new Cell(king.y, king.x))) availableMovements.Add($"{piece},{pawn.y + 1},{pawn.x - 1}");
+                if (!black_king_attacked(new Cell(king.y, king.x))) availableMovements.Add($"{piece},{pawn.y},{pawn.x},{piece},{pawn.y + 1},{pawn.x - 1}");
             }
             return availableMovements;
         }
+
+
 
         public static HashSet<string> available_black_bishop_moves(string piece, Cell bishop)
         {
@@ -303,7 +326,7 @@ namespace ConsoleApp1
                         tempCells[nPosition.y, nPosition.x] = "bb";
                         if (!black_king_attacked(new Cell(king.y, king.x)))
                         {
-                            availableMovements.Add($"{piece},{nPosition.y},{nPosition.x}");
+                            availableMovements.Add($"{piece},{bishop.y},{bishop.x},{piece},{nPosition.y},{nPosition.x}");
                         }
                     }
                     if (nCell != "") break;
@@ -331,7 +354,7 @@ namespace ConsoleApp1
                         tempCells[nPosition.y, nPosition.x] = "br";
                         if (!black_king_attacked(new Cell(king.y, king.x)))
                         {
-                            availableMovements.Add($"{piece},{nPosition.y},{nPosition.x}");
+                            availableMovements.Add($"{piece},{rock.y},{rock.x},{piece},{nPosition.y},{nPosition.x}");
                         }
                     }
                     if (nCell != "") break;
@@ -359,7 +382,7 @@ namespace ConsoleApp1
                         tempCells[nPosition.y, nPosition.x] = "bq";
                         if (!black_king_attacked(new Cell(king.y, king.x)))
                         {
-                            availableMovements.Add($"{piece},{nPosition.y},{nPosition.x}");
+                            availableMovements.Add($"{piece},{queen.y},{queen.x},{piece},{nPosition.y},{nPosition.x}");
                         }
                     }
                     if (nCell != "") break;
@@ -380,7 +403,7 @@ namespace ConsoleApp1
                         tempCells[nPosition.y, nPosition.x] = "bq";
                         if (!black_king_attacked(new Cell(king.y, king.x)))
                         {
-                            availableMovements.Add($"{piece},{nPosition.y},{nPosition.x}");
+                            availableMovements.Add($"{piece},{queen.y},{queen.x},{piece},{nPosition.y},{nPosition.x}");
                         }
                     }
                     if (nCell != "") break;
@@ -451,18 +474,18 @@ namespace ConsoleApp1
                     tempCells[king.y + kingMovement.y, king.x + kingMovement.x] = "wk";
                     if (!white_king_attacked(new Cell(king.y + kingMovement.y, king.x + kingMovement.x)))
                     {
-                        availableMovements.Add($"wk,{king.y + kingMovement.y},{king.x + kingMovement.x}");
+                        availableMovements.Add($"wk,{king.y},{king.x},wk,{king.y + kingMovement.y},{king.x + kingMovement.x}");
                     }
                 }
             }
             tempCells = (string[,])cells.Clone();
             if (!white_king_move && !white_rock1_move && cells[7, 1] == "" && cells[7, 2] == "" && cells[7, 3] == "" && !white_king_attacked(new Cell(king.y, king.x)) && !white_king_attacked(new Cell(king.y, king.x - 1)) && !white_king_attacked(new Cell(king.y, king.x - 2)))
             {
-                availableMovements.Add($"wk,{king.y},{king.x - 2}");
+                availableMovements.Add($"wk,{king.y},{king.x},wk,{king.y},{king.x - 2}");
             }
             if (!white_king_move && !white_rock2_move && cells[7, 5] == "" && cells[7, 6] == "" && !white_king_attacked(new Cell(king.y, king.x)) && !white_king_attacked(new Cell(king.y, king.x + 1)) && !white_king_attacked(new Cell(king.y, king.x + 2)))
             {
-                availableMovements.Add($"wk,{king.y},{king.x + 2}");
+                availableMovements.Add($"wk,{king.y},{king.x},wk,{king.y},{king.x + 2}");
             }
             return availableMovements;
         }
@@ -483,7 +506,7 @@ namespace ConsoleApp1
              
                     if (!white_king_attacked(new Cell(king.y, king.x)))
                     {
-                        availableMovements.Add($"{piece},{knight.y + knightMovement.y},{knight.x + knightMovement.x}");
+                        availableMovements.Add($"{piece},{knight.y},{knight.x},{piece},{knight.y + knightMovement.y},{knight.x + knightMovement.x}");
                     }
                 }
 
@@ -501,7 +524,11 @@ namespace ConsoleApp1
                 tempCells = (string[,])cells.Clone();
                 tempCells[pawn.y, pawn.x] = "";
                 tempCells[pawn.y - 1, pawn.x] = "wp";
-                if (!white_king_attacked(new Cell(king.y, king.x))) availableMovements.Add($"{piece},{pawn.y - 1},{pawn.x}");
+                if (!white_king_attacked(new Cell(king.y, king.x)))
+                {
+                    if (pawn.y - 1 > 0) availableMovements.Add($"{piece},{pawn.y},{pawn.x},{piece},{pawn.y - 1},{pawn.x}");
+                    else available_promotion_moves(piece, pawn.y, pawn.x, pawn.y - 1, pawn.x, availableMovements);
+                }
             }
             if (pawn.y == 6)
             {
@@ -511,7 +538,7 @@ namespace ConsoleApp1
                     tempCells = (string[,])cells.Clone();
                     tempCells[pawn.y, pawn.x] = "";
                     tempCells[pawn.y - 2, pawn.x] = "wp";
-                    if (!white_king_attacked(new Cell(king.y, king.x))) availableMovements.Add($"{piece},{pawn.y - 2},{pawn.x}");
+                    if (!white_king_attacked(new Cell(king.y, king.x))) availableMovements.Add($"{piece},{pawn.y},{pawn.x},{piece},{pawn.y - 2},{pawn.x}");
                 }
             }
             nCell = valid_position(pawn.y - 1, pawn.x + 1);
@@ -520,33 +547,59 @@ namespace ConsoleApp1
                 tempCells = (string[,])cells.Clone();
                 tempCells[pawn.y, pawn.x] = "";
                 tempCells[pawn.y - 1, pawn.x + 1] = "wp";
-                if (!white_king_attacked(new Cell(king.y, king.x))) availableMovements.Add($"{piece},{pawn.y - 1},{pawn.x + 1}");
+                if (!white_king_attacked(new Cell(king.y, king.x)))
+                {
+                    if (pawn.y - 1 > 0) availableMovements.Add($"{piece},{pawn.y},{pawn.x},{piece},{pawn.y - 1},{pawn.x + 1}");
+                    else available_promotion_moves(piece, pawn.y, pawn.x, pawn.y - 1, pawn.x + 1, availableMovements);
+                }
             }
             nCell = valid_position(pawn.y - 1, pawn.x - 1);
-            if (Regex.Match(nCell, @"^w").Success)
+            if (Regex.Match(nCell, @"^b").Success)
             {
                 tempCells = (string[,])cells.Clone();
                 tempCells[pawn.y, pawn.x] = "";
                 tempCells[pawn.y - 1, pawn.x - 1] = "wp";
-                if (!white_king_attacked(new Cell(king.y, king.x))) availableMovements.Add($"{piece},{pawn.y - 1},{pawn.x - 1}");
+                if (!white_king_attacked(new Cell(king.y, king.x)))
+                {
+                    if (pawn.y - 1 > 0) availableMovements.Add($"{piece},{pawn.y},{pawn.x},{piece},{pawn.y - 1},{pawn.x - 1}");
+                    else available_promotion_moves(piece, pawn.y, pawn.x, pawn.y - 1, pawn.x - 1, availableMovements);
+                }
             }
-            if (last_movement == $"bp,{pawn.y - 2},{pawn.x + 1},{pawn.y},{pawn.x + 1}")
+            if (last_movement == $"bp,{pawn.y - 2},{pawn.x + 1},bp,{pawn.y},{pawn.x + 1}")
             {
                 tempCells = (string[,])cells.Clone();
                 tempCells[pawn.y, pawn.x] = "";
                 tempCells[pawn.y, pawn.x + 1] = "";
                 tempCells[pawn.y - 1, pawn.x + 1] = "wp";
-                if (!white_king_attacked(new Cell(king.y, king.x))) availableMovements.Add($"{piece},{pawn.y - 1},{pawn.x + 1}");
+                if (!white_king_attacked(new Cell(king.y, king.x))) availableMovements.Add($"{piece},{pawn.y},{pawn.x},{piece},{pawn.y - 1},{pawn.x + 1}");
             }
-            if (last_movement == $"bp,{pawn.y - 2},{pawn.x - 1},{pawn.y},{pawn.x - 1}")
+            if (last_movement == $"bp,{pawn.y - 2},{pawn.x - 1},bp,{pawn.y},{pawn.x - 1}")
             {
                 tempCells = (string[,])cells.Clone();
                 tempCells[pawn.y, pawn.x] = "";
                 tempCells[pawn.y, pawn.x - 1] = "";
                 tempCells[pawn.y - 1, pawn.x - 1] = "wp";
-                if (!white_king_attacked(new Cell(king.y, king.x))) availableMovements.Add($"{piece},{pawn.y - 1},{pawn.x - 1}");
+                if (!white_king_attacked(new Cell(king.y, king.x))) availableMovements.Add($"{piece},{pawn.y},{pawn.x},{piece},{pawn.y - 1},{pawn.x - 1}");
             }
             return availableMovements;
+        }
+
+        public static void available_promotion_moves(string piece, int y0, int x0, int y, int x, HashSet<string> availableMovements)
+        {
+            if (y == 0)
+            {
+                availableMovements.Add($"{piece},{y0},{x0},wq{next_white_queen},{y},{x}");
+                availableMovements.Add($"{piece},{y0},{x0},wr{next_white_rock},{y},{x}");
+                availableMovements.Add($"{piece},{y0},{x0},wb{next_white_bishop},{y},{x}");
+                availableMovements.Add($"{piece},{y0},{x0},wn{next_white_knight},{y},{x}");
+            }
+            else if (y == 7)
+            {
+                availableMovements.Add($"{piece},{y0},{x0},bq{next_black_queen},{y},{x}");
+                availableMovements.Add($"{piece},{y0},{x0},br{next_black_rock},{y},{x}");
+                availableMovements.Add($"{piece},{y0},{x0},bb{next_black_bishop},{y},{x}");
+                availableMovements.Add($"{piece},{y0},{x0},bn{next_black_knight},{y},{x}");
+            }
         }
 
         public static HashSet<string> available_white_bishop_moves(string piece, Cell bishop)
@@ -568,7 +621,7 @@ namespace ConsoleApp1
                         tempCells[nPosition.y, nPosition.x] = "wb";
                         if (!white_king_attacked(new Cell(king.y, king.x)))
                         {
-                            availableMovements.Add($"{piece},{nPosition.y},{nPosition.x}");
+                            availableMovements.Add($"{piece},{bishop.y},{bishop.x},{piece},{nPosition.y},{nPosition.x}");
                         }
                     }
                     if (nCell != "") break;
@@ -596,7 +649,7 @@ namespace ConsoleApp1
                         tempCells[nPosition.y, nPosition.x] = "wr";
                         if (!white_king_attacked(new Cell(king.y, king.x)))
                         {
-                            availableMovements.Add($"{piece},{nPosition.y},{nPosition.x}");
+                            availableMovements.Add($"{piece},{rock.y},{rock.x},{piece},{nPosition.y},{nPosition.x}");
                         }
                     }
                     if (nCell != "") break;
@@ -624,7 +677,7 @@ namespace ConsoleApp1
                         tempCells[nPosition.y, nPosition.x] = "wq";
                         if (!black_king_attacked(new Cell(king.y, king.x)))
                         {
-                            availableMovements.Add($"{piece},{nPosition.y},{nPosition.x}");
+                            availableMovements.Add($"{piece},{queen.y},{queen.x},{piece},{nPosition.y},{nPosition.x}");
                         }
                     }
                     if (nCell != "") break;
@@ -645,7 +698,7 @@ namespace ConsoleApp1
                         tempCells[nPosition.y, nPosition.x] = "wq";
                         if (!white_king_attacked(new Cell(king.y, king.x)))
                         {
-                            availableMovements.Add($"{piece},{nPosition.y},{nPosition.x}");
+                            availableMovements.Add($"{piece},{queen.y},{queen.x},{piece},{nPosition.y},{nPosition.x}");
                         }
                     }
                     if (nCell != "") break;
