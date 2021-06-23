@@ -12,6 +12,8 @@ namespace ConsoleApp1
         static Positions positions = new Positions();
         public static void Main(String[] args)
         {
+            positions.setInitialBoard();
+            positions.tempCells = (string[,])positions.cells.Clone();
             List<string> black_movements = positions.available_black_moves().ToList<string>();
             Console.WriteLine(String.Join("\n", black_movements));
             Console.WriteLine($"Total movements: {black_movements.Count()}");

@@ -10,8 +10,7 @@ namespace ConsoleApp1
 
         public Positions()
         {
-            setInitialBoard();
-            tempCells = (string[,])cells.Clone();
+            
         }
 
         public List<Cell> knightMovements = new List<Cell>{new Cell(1,2),
