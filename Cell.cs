@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ConsoleApp1
 {
-    class Cell
+    public class Cell
     {
         public int y;
         public int x;
