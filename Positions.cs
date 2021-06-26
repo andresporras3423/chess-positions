@@ -258,8 +258,9 @@ namespace ConsoleApp1
             }
             if (pawn.y == 1)
             {
-                nCell = valid_position(pawn.y + 2, pawn.x);
-                if (nCell == "")
+                nCell = valid_position(pawn.y + 1, pawn.x);
+                string nCell2 = valid_position(pawn.y + 2, pawn.x);
+                if (nCell == "" && nCell2 == "")
                 {
                     tempCells = (string[,])cells.Clone();
                     tempCells[pawn.y, pawn.x] = "";
@@ -537,8 +538,9 @@ namespace ConsoleApp1
             }
             if (pawn.y == 6)
             {
-                nCell = valid_position(pawn.y - 2, pawn.x);
-                if (nCell == "")
+                nCell = valid_position(pawn.y - 1, pawn.x);
+                string nCell2 = valid_position(pawn.y  - 2, pawn.x);
+                if (nCell == "" && nCell2 == "")
                 {
                     tempCells = (string[,])cells.Clone();
                     tempCells[pawn.y, pawn.x] = "";
