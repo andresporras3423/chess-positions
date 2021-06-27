@@ -42,12 +42,10 @@ namespace ConsoleApp1
             new Cell(-1, 0)};
 
         public string last_movement = ",,,,,";
-        public bool black_king_move = false;
-        public bool black_rock1_move = false;
-        public bool black_rock2_move = false;
-        public bool white_king_move = false;
-        public bool white_rock1_move = false;
-        public bool white_rock2_move = false;
+        public bool black_long_castling = true;
+        public bool black_short_castling = true;
+        public bool white_long_castling = true;
+        public bool white_short_castling = true;
 
         public int next_black_queen = 2;
         public int next_black_rock = 3;
@@ -203,11 +201,11 @@ namespace ConsoleApp1
                 }
             }
             tempCells = (string[,])cells.Clone();
-            if (!black_king_move && !black_rock1_move && cells[0, 1] == "" && cells[0, 2] == "" && cells[0, 3] == "" && !black_king_attacked(new Cell(king.y, king.x)) && !black_king_attacked(new Cell(king.y, king.x - 1)) && !black_king_attacked(new Cell(king.y, king.x - 2)))
+            if (black_long_castling && cells[0, 1] == "" && cells[0, 2] == "" && cells[0, 3] == "" && !black_king_attacked(new Cell(king.y, king.x)) && !black_king_attacked(new Cell(king.y, king.x - 1)) && !black_king_attacked(new Cell(king.y, king.x - 2)))
             {
                 availableMovements.Add($"bk,{king.y},{king.x},bk,{king.y},{king.x - 2}");
             }
-            if (!black_king_move && !black_rock2_move && cells[0, 5] == "" && cells[0, 6] == "" && !black_king_attacked(new Cell(king.y, king.x)) && !black_king_attacked(new Cell(king.y, king.x + 1)) && !black_king_attacked(new Cell(king.y, king.x + 2)))
+            if (black_short_castling && cells[0, 5] == "" && cells[0, 6] == "" && !black_king_attacked(new Cell(king.y, king.x)) && !black_king_attacked(new Cell(king.y, king.x + 1)) && !black_king_attacked(new Cell(king.y, king.x + 2)))
             {
                 availableMovements.Add($"bk,{king.y},{king.x},bk,{king.y},{king.x + 2}");
             }
@@ -485,11 +483,11 @@ namespace ConsoleApp1
                 }
             }
             tempCells = (string[,])cells.Clone();
-            if (!white_king_move && !white_rock1_move && cells[7, 1] == "" && cells[7, 2] == "" && cells[7, 3] == "" && !white_king_attacked(new Cell(king.y, king.x)) && !white_king_attacked(new Cell(king.y, king.x - 1)) && !white_king_attacked(new Cell(king.y, king.x - 2)))
+            if (white_long_castling && cells[7, 1] == "" && cells[7, 2] == "" && cells[7, 3] == "" && !white_king_attacked(new Cell(king.y, king.x)) && !white_king_attacked(new Cell(king.y, king.x - 1)) && !white_king_attacked(new Cell(king.y, king.x - 2)))
             {
                 availableMovements.Add($"wk,{king.y},{king.x},wk,{king.y},{king.x - 2}");
             }
-            if (!white_king_move && !white_rock2_move && cells[7, 5] == "" && cells[7, 6] == "" && !white_king_attacked(new Cell(king.y, king.x)) && !white_king_attacked(new Cell(king.y, king.x + 1)) && !white_king_attacked(new Cell(king.y, king.x + 2)))
+            if (white_short_castling && cells[7, 5] == "" && cells[7, 6] == "" && !white_king_attacked(new Cell(king.y, king.x)) && !white_king_attacked(new Cell(king.y, king.x + 1)) && !white_king_attacked(new Cell(king.y, king.x + 2)))
             {
                 availableMovements.Add($"wk,{king.y},{king.x},wk,{king.y},{king.x + 2}");
             }
