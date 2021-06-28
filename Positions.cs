@@ -600,7 +600,7 @@ namespace ConsoleApp1
                 tempCells[pawn.y - 1, pawn.x - 1] = cells[pawn.y, pawn.x];
                 if (!white_king_attacked(new Cell(king.y, king.x)))
                 {
-                    if (pawn.y - 1 > 0) availableMovements.Add($"{piece},{pawn.y},{pawn.x},{piece},{pawn.y - 1},{pawn.x - 1},{cells[pawn.y - 1, pawn.x + 1]}");
+                    if (pawn.y - 1 > 0) availableMovements.Add($"{piece},{pawn.y},{pawn.x},{piece},{pawn.y - 1},{pawn.x - 1},{cells[pawn.y - 1, pawn.x - 1]}");
                     else available_promotion_moves(piece, pawn.y, pawn.x, pawn.y - 1, pawn.x - 1, availableMovements);
                 }
             }
@@ -737,7 +737,7 @@ namespace ConsoleApp1
                         tempCells[nPosition.y, nPosition.x] = cells[queen.y, queen.x];
                         if (!white_king_attacked(new Cell(king.y, king.x)))
                         {
-                            availableMovements.Add($"{piece},{queen.y},{queen.x},{piece},{nPosition.y},{nPosition.x}");
+                            availableMovements.Add($"{piece},{queen.y},{queen.x},{piece},{nPosition.y},{nPosition.x},{cells[nPosition.y, nPosition.x]}");
                         }
                     }
                     if (nCell != "") break;
