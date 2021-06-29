@@ -19,7 +19,7 @@ namespace ConsoleApp1
         public bool white_long_castling;
         public bool white_short_castling;
         public string last_movement;
-        public string movements_available;
+        public int movements_available;
 
         public BoardData(string npieces_position,
         int ntotal_pieces,
@@ -28,7 +28,7 @@ namespace ConsoleApp1
         bool nwhite_long_castling,
         bool nwhite_short_castling,
         string nlast_movement,
-        string nmovements_available)
+        int nmovements_available)
         {
             pieces_position= npieces_position;
             total_pieces=ntotal_pieces;
@@ -38,6 +38,20 @@ namespace ConsoleApp1
             white_short_castling= nwhite_short_castling;
             last_movement= nlast_movement;
             movements_available= nmovements_available;
+        }
+        public string print_info()
+        {
+            string print = "";
+            print += $"" +
+                $"current board: {pieces_position}\n" +
+                $"pieces: {total_pieces}\n" +
+                $"black long castling: {black_long_castling}\n" +
+                $"black short castling: {black_short_castling}\n" +
+                $"white long castling: {white_long_castling}\n" +
+                $"white short castling: {white_short_castling}\n" +
+                $"most recent movement: {last_movement}\n" +
+                $"total movements available: {movements_available}\n";
+            return print;
         }
     }
 }
