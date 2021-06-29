@@ -909,6 +909,16 @@ namespace ConsoleApp1
 
         public void setInitialBoard()
         {
+            cells = new string[,]{
+                { "","","","","","","",""},
+            { "","","","","","","",""},
+            { "","","","","","","",""},
+            { "","","","","","","",""},
+            { "","","","","","","",""},
+            { "","","","","","","",""},
+            { "","","","","","","",""},
+            { "","","","","","","",""}
+            };
             foreach (var blackPiece in blackPieces)
             {
                 cells[blackPiece.Value.y, blackPiece.Value.x] = blackPiece.Key;
