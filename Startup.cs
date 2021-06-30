@@ -9,7 +9,7 @@ namespace ConsoleApp1
     class Startup
     {
 
-        static Game game1 = new Game();
+        static Game game1 = new Game(true);
         public static void Main(String[] args)
         {
             //positions.setInitialBoard();

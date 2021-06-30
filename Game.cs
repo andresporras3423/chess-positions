@@ -10,9 +10,11 @@ namespace ConsoleApp1
     {
         public List<BoardData> boards = new List<BoardData>();
         public Positions positions = new Positions();
+        public bool save_in_database;
 
-        public Game()
+        public Game(bool nsave)
         {
+            save_in_database = nsave;
             positions.setInitialBoard();
         }
 
