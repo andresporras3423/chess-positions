@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Linq;
 
-namespace ConsoleApp1
+namespace chess
 {
     class Program
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace ConsoleApp1
+namespace chess
 {
     public class Game
     {

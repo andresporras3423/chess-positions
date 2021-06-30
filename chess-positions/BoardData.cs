@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsoleApp1
+namespace chess
 {
     // INFO FOR THE DATABASE. A position has:
     // 1) the pieces and their positions
