@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ConsoleApp1
 {
@@ -38,7 +39,7 @@ namespace ConsoleApp1
             {
                 positions.whitePieces.Remove(selectedMoveInfo.First());
                 positions.whitePieces[selectedMoveInfo[3]] = new Cell(Int32.Parse(selectedMoveInfo[4]), Int32.Parse(selectedMoveInfo[5]));
-                //updateWhitePromotion()
+                updateWhitePromotion(selectedMoveInfo[3]);
             }
             else if (selectedMoveInfo.Last() == "castling")
             {
@@ -77,6 +78,7 @@ namespace ConsoleApp1
             {
                 positions.blackPieces.Remove(selectedMoveInfo.First());
                 positions.blackPieces[selectedMoveInfo[3]] = new Cell(Int32.Parse(selectedMoveInfo[4]), Int32.Parse(selectedMoveInfo[5]));
+                updateBlackPromotion(selectedMoveInfo[3]);
             }
             else if (selectedMoveInfo.Last() == "castling") //castling
             {
@@ -96,6 +98,22 @@ namespace ConsoleApp1
             positions.last_movement = movements[randomMovement];
             positions.setInitialBoard();
             next_white_move();
+        }
+
+        public void updateWhitePromotion(string whitePromoted)
+        {
+            if (Regex.Match(whitePromoted, @"^wq").Success) positions.next_white_queen+=1;
+            else if (Regex.Match(whitePromoted, @"^wr").Success) positions.next_white_rock += 1;
+            else if (Regex.Match(whitePromoted, @"^wb").Success) positions.next_white_bishop += 1;
+            else positions.next_white_knight += 1;
+        }
+
+        public void updateBlackPromotion(string blackPromoted)
+        {
+            if (Regex.Match(blackPromoted, @"^bq").Success) positions.next_black_queen += 1;
+            else if (Regex.Match(blackPromoted, @"^br").Success) positions.next_black_rock += 1;
+            else if (Regex.Match(blackPromoted, @"^bb").Success) positions.next_black_bishop += 1;
+            else positions.next_black_knight += 1;
         }
 
         public string give_current_board()
