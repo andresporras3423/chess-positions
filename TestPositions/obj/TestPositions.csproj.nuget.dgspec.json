@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\documents\\microverse\\cs\\TestPositions\\TestPositions.csproj": {}
+    "D:\\documents\\microverse\\cs\\chess-positions\\TestPositions\\TestPositions.csproj": {}
   },
   "projects": {
-    "D:\\documents\\microverse\\cs\\chess-positions\\chess-positions.csproj": {
+    "D:\\documents\\microverse\\cs\\chess-positions\\chess-positions\\chess-positions.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\documents\\microverse\\cs\\chess-positions\\chess-positions.csproj",
+        "projectUniqueName": "D:\\documents\\microverse\\cs\\chess-positions\\chess-positions\\chess-positions.csproj",
         "projectName": "chess-positions",
-        "projectPath": "D:\\documents\\microverse\\cs\\chess-positions\\chess-positions.csproj",
+        "projectPath": "D:\\documents\\microverse\\cs\\chess-positions\\chess-positions\\chess-positions.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "D:\\documents\\microverse\\cs\\chess-positions\\obj\\",
+        "outputPath": "D:\\documents\\microverse\\cs\\chess-positions\\chess-positions\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -80,14 +80,14 @@
         }
       }
     },
-    "D:\\documents\\microverse\\cs\\TestPositions\\TestPositions.csproj": {
+    "D:\\documents\\microverse\\cs\\chess-positions\\TestPositions\\TestPositions.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\documents\\microverse\\cs\\TestPositions\\TestPositions.csproj",
+        "projectUniqueName": "D:\\documents\\microverse\\cs\\chess-positions\\TestPositions\\TestPositions.csproj",
         "projectName": "TestPositions",
-        "projectPath": "D:\\documents\\microverse\\cs\\TestPositions\\TestPositions.csproj",
+        "projectPath": "D:\\documents\\microverse\\cs\\chess-positions\\TestPositions\\TestPositions.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "D:\\documents\\microverse\\cs\\TestPositions\\obj\\",
+        "outputPath": "D:\\documents\\microverse\\cs\\chess-positions\\TestPositions\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -110,8 +110,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\documents\\microverse\\cs\\chess-positions\\chess-positions.csproj": {
-                "projectPath": "D:\\documents\\microverse\\cs\\chess-positions\\chess-positions.csproj"
+              "D:\\documents\\microverse\\cs\\chess-positions\\chess-positions\\chess-positions.csproj": {
+                "projectPath": "D:\\documents\\microverse\\cs\\chess-positions\\chess-positions\\chess-positions.csproj"
               }
             }
           }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WfgcE5v8XhWpKAKMj+xVr68udWLNPCv6i6Ax999fjjIAo4caIfsgKvXqa5cGRh4TgKdYk+TH9MUN4Foj+KFHbQ==",
+  "dgSpecHash": "fPDKHvNuh+OuSJ2XB0ZGrrbxhP5KRqcQtovQTQjUORLf17wEXqptwNdE5LMv82qQ38pI3/fUJDHUjM5pXk7hqA==",
   "success": true,
-  "projectFilePath": "D:\\documents\\microverse\\cs\\chess-positions\\chess-positions.csproj",
+  "projectFilePath": "D:\\documents\\microverse\\cs\\chess-positions\\chess-positions\\chess-positions.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Usuario\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

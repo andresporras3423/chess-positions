@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "c5ZSErXxfY2GtVCfpcs06f+9ReAHDtZrfxZN6CjsWVOjuW+8BFGo1DkWSaRrmFCW20HMQJqPyFlQ6H3CYccLNw==",
+  "dgSpecHash": "TrMFcVaZ1Mun+yWgBAMer/MjxtFkO0ckZnKQ/u2v1UGreRwu5s3N/CBT4V+BXVDKmx2ii3uLVKG3PsT9ok2Azg==",
   "success": true,
-  "projectFilePath": "D:\\documents\\microverse\\cs\\TestPositions\\TestPositions.csproj",
+  "projectFilePath": "D:\\documents\\microverse\\cs\\chess-positions\\TestPositions\\TestPositions.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.codecoverage\\16.5.0\\microsoft.codecoverage.16.5.0.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
