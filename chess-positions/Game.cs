@@ -9,19 +9,20 @@ namespace chess
     public class Game
     {
         public List<BoardData> boards = new List<BoardData>();
-        public Positions positions = new Positions();
+        public Positions positions;
         public bool save_in_database;
 
         public Game(bool nsave)
         {
             save_in_database = nsave;
-            positions.setInitialBoard();
         }
 
         public void start_game()
         {
+            positions = new Positions();
+            positions.setInitialBoard();
+            boards.Clear();
             next_white_move();
-
         }
 
         public void next_white_move()
@@ -29,7 +30,10 @@ namespace chess
             List<string> movements = positions.available_white_moves().ToList<string>();
             add_recent_board(movements.Count());
             print_last_board_info();
-            if (movements.Count() == 0) return;
+            if (movements.Count() == 0 || positions.blackPieces.Keys.Count + positions.whitePieces.Keys.Count == 2)
+            {
+                start_game();
+            }
             Random rnd = new Random();
             int randomMovement = rnd.Next(movements.Count());
             string[] selectedMoveInfo = movements[randomMovement].Split(",");
@@ -68,7 +72,10 @@ namespace chess
             List<string> movements = positions.available_black_moves().ToList<string>();
             add_recent_board(movements.Count());
             print_last_board_info();
-            if (movements.Count() == 0) return;
+            if (movements.Count() == 0 || positions.blackPieces.Keys.Count + positions.whitePieces.Keys.Count == 2)
+            {
+                start_game();
+            }
             Random rnd = new Random();
             int randomMovement = rnd.Next(movements.Count());
             string[] selectedMoveInfo = movements[randomMovement].Split(",");
@@ -144,9 +151,19 @@ namespace chess
                 positions.black_short_castling,
                 positions.white_long_castling,
                 positions.black_short_castling,
-                positions.last_movement,
+                last_movement_reduced(),
                 total_movements);
+            if(save_in_database) SavePositions.savePosition(bd);
             boards.Add(bd);
+        }
+
+        public string last_movement_reduced()
+        {
+            string[] move_info = positions.last_movement.Split(",");
+            if (move_info[0].Length > 2) move_info[0] = move_info[0].Substring(0, 2);
+            if (move_info[3].Length > 2) move_info[3] = move_info[3].Substring(0, 2);
+            if (move_info[6].Length > 2) move_info[6] = move_info[6].Substring(0, 2);
+            return String.Join(",", move_info);
         }
 
         public void print_last_board_info()

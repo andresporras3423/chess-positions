@@ -1,4 +1,4 @@
-using ConsoleApp1;
+using chess;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

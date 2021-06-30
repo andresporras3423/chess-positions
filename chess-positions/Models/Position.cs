@@ -16,5 +16,24 @@ namespace chess.Models
         public bool WhiteShortCastling { get; set; }
         public string LastMove { get; set; }
         public int AvailableMoves { get; set; }
+
+        //public Position(string nBoard, 
+        //    int nTotalPieces, 
+        //    bool nBlackLongCastling,
+        //    bool nBlackShortCastling,
+        //    bool nWhiteLongCastling,
+        //    bool nWhiteShortCastling,
+        //    string nLastMove,
+        //    int nAvailableMoves)
+        //{
+        //    Board = nBoard;
+        //    TotalPieces = nTotalPieces;
+        //    BlackLongCastling = nBlackLongCastling;
+        //    BlackShortCastling = nBlackShortCastling;
+        //    WhiteLongCastling = nWhiteLongCastling;
+        //    WhiteShortCastling = nWhiteShortCastling;
+        //    LastMove = nLastMove;
+        //    AvailableMoves = nAvailableMoves;
+        //}
     }
 }

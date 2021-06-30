@@ -118,7 +118,6 @@ D:\documents\microverse\cs\chess-positions\chess-positions\bin\Debug\netcoreapp3
 D:\documents\microverse\cs\chess-positions\chess-positions\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\documents\microverse\cs\chess-positions\chess-positions\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\documents\microverse\cs\chess-positions\chess-positions\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-D:\documents\microverse\cs\chess-positions\chess-positions\obj\Debug\netcoreapp3.1\chess-positions.csproj.AssemblyReference.cache
 D:\documents\microverse\cs\chess-positions\chess-positions\obj\Debug\netcoreapp3.1\chess-positions.AssemblyInfoInputs.cache
 D:\documents\microverse\cs\chess-positions\chess-positions\obj\Debug\netcoreapp3.1\chess-positions.AssemblyInfo.cs
 D:\documents\microverse\cs\chess-positions\chess-positions\obj\Debug\netcoreapp3.1\chess-positions.csproj.CoreCompileInputs.cache
@@ -126,3 +125,4 @@ D:\documents\microverse\cs\chess-positions\chess-positions\obj\Debug\netcoreapp3
 D:\documents\microverse\cs\chess-positions\chess-positions\obj\Debug\netcoreapp3.1\chess-positions.dll
 D:\documents\microverse\cs\chess-positions\chess-positions\obj\Debug\netcoreapp3.1\chess-positions.pdb
 D:\documents\microverse\cs\chess-positions\chess-positions\obj\Debug\netcoreapp3.1\chess-positions.genruntimeconfig.cache
+D:\documents\microverse\cs\chess-positions\chess-positions\obj\Debug\netcoreapp3.1\chess-positions.csproj.AssemblyReference.cache
