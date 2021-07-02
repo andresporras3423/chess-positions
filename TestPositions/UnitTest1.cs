@@ -525,7 +525,7 @@ namespace TestPositions
         }
 
         [Test]
-        public void special_test()
+        public void test_queen_movements_when_king_in_check()
         {
             clear_board(positions);
             no_castling(positions);
@@ -544,6 +544,24 @@ namespace TestPositions
             positions.tempCells = (string[,])positions.cells.Clone();
             List<string> movements = positions.available_white_moves().ToList<string>();
             Assert.AreEqual(6, movements.Count());
+        }
+
+        [Test]
+        public void test_knight_movements_when_king_in_check()
+        {
+            clear_board(positions);
+            no_castling(positions);
+            positions.blackPieces["bk"] = new Cell(1, 3);
+            positions.blackPieces["bp1"] = new Cell(4, 1);
+            positions.blackPieces["bp2"] = new Cell(4, 4);
+            positions.blackPieces["bq1"] = new Cell(7, 2);
+            positions.blackPieces["bn1"] = new Cell(7, 7);
+
+            positions.whitePieces["wk"] = new Cell(5, 6);
+            positions.setInitialBoard();
+            positions.tempCells = (string[,])positions.cells.Clone();
+            List<string> movements = positions.available_white_moves().ToList<string>();
+            Assert.AreEqual(5, movements.Count());
         }
 
         public void no_castling(Positions position)

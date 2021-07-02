@@ -28,7 +28,7 @@ namespace chess
         public void next_white_move()
         {
             List<string> movements = positions.available_white_moves().ToList<string>();
-            if(is_game_finished(movements.Count()) == true) start_game();
+            if (is_it_game_over(movements.Count()) == true) return;
             add_recent_board(movements.Count());
             print_last_board_info();
             Random rnd = new Random();
@@ -67,7 +67,7 @@ namespace chess
         public void next_black_move()
         {
             List<string> movements = positions.available_black_moves().ToList<string>();
-            if (is_game_finished(movements.Count()) == true) start_game();
+            if (is_it_game_over(movements.Count()) == true) return;
             add_recent_board(movements.Count());
             print_last_board_info();
             Random rnd = new Random();
@@ -136,10 +136,17 @@ namespace chess
             return current_board;
         }
 
-        public bool is_game_finished(int total_movements)
+        public bool is_it_game_over(int total_movements)
         {
-            if (total_movements == 0 || positions.blackPieces.Keys.Count + positions.whitePieces.Keys.Count == 2)
+            if (total_movements == 0)
             {
+                add_recent_board(total_movements);
+                start_game();
+                return true;
+            }
+            if (positions.blackPieces.Keys.Count + positions.whitePieces.Keys.Count == 2)
+            {
+                start_game();
                 return true;
             }
             return false;

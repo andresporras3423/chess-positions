@@ -754,7 +754,7 @@ namespace chess
 
         public bool attacked_by_black_knight(int y, int x)
         {
-            if (valid_temp_position(y - 2, x + 1, 0, 2) == "bn" || valid_temp_position(y - 2, x - 1, 0, 2) == "bn" || valid_temp_position(y + 2, x - 1, 0, 2) == "bn" || valid_temp_position(y + 2, x - 1, 0, 2) == "bn" || valid_temp_position(y - 1, x + 2, 0, 2) == "bn" || valid_temp_position(y - 1, x - 2, 0, 2) == "bn" || valid_temp_position(y + 1, x + 2, 0, 2) == "bn" || valid_temp_position(y + 1, x - 2, 0, 2) == "bn") return true;
+            if (valid_temp_position(y - 2, x + 1, 0, 2) == "bn" || valid_temp_position(y - 2, x - 1, 0, 2) == "bn" || valid_temp_position(y + 2, x - 1, 0, 2) == "bn" || valid_temp_position(y + 2, x + 1, 0, 2) == "bn" || valid_temp_position(y - 1, x + 2, 0, 2) == "bn" || valid_temp_position(y - 1, x - 2, 0, 2) == "bn" || valid_temp_position(y + 1, x + 2, 0, 2) == "bn" || valid_temp_position(y + 1, x - 2, 0, 2) == "bn") return true;
             return false;
         }
 
@@ -816,7 +816,7 @@ namespace chess
 
         public bool attacked_by_white_knight(int y, int x)
         {
-            if (valid_temp_position(y - 2, x + 1,0, 2) == "wn" || valid_temp_position(y - 2, x - 1,0, 2) == "wn" || valid_temp_position(y + 2, x - 1,0, 2) == "wn" || valid_temp_position(y + 2, x - 1,0, 2) == "wn" || valid_temp_position(y - 1, x + 2,0, 2) == "wn" || valid_temp_position(y - 1, x - 2,0, 2) == "wn" || valid_temp_position(y + 1, x + 2,0, 2) == "wn" || valid_temp_position(y + 1, x - 2,0, 2) == "wn") return true;
+            if (valid_temp_position(y - 2, x + 1,0, 2) == "wn" || valid_temp_position(y - 2, x - 1,0, 2) == "wn" || valid_temp_position(y + 2, x - 1,0, 2) == "wn" || valid_temp_position(y + 2, x + 1,0, 2) == "wn" || valid_temp_position(y - 1, x + 2,0, 2) == "wn" || valid_temp_position(y - 1, x - 2,0, 2) == "wn" || valid_temp_position(y + 1, x + 2,0, 2) == "wn" || valid_temp_position(y + 1, x - 2,0, 2) == "wn") return true;
             return false;
         }
 
