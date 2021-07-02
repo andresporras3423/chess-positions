@@ -141,12 +141,12 @@ namespace chess
             if (total_movements == 0)
             {
                 add_recent_board(total_movements);
-                start_game();
+                //start_game();
                 return true;
             }
             if (positions.blackPieces.Keys.Count + positions.whitePieces.Keys.Count == 2)
             {
-                start_game();
+                //start_game();
                 return true;
             }
             return false;
