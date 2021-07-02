@@ -14,8 +14,9 @@ namespace chess
                 using (var context = new chessmemoContext())
                 {
                     Position nPosition = new Position{Board=nboard.pieces_position,
-                        TotalPieces=nboard.total_pieces,
-                        BlackLongCastling=nboard.black_long_castling,
+                        TotalBlackPieces=nboard.total_black_pieces,
+                        TotalWhitePieces = nboard.total_white_pieces,
+                        BlackLongCastling =nboard.black_long_castling,
                         BlackShortCastling=nboard.black_short_castling,
                         WhiteLongCastling=nboard.white_long_castling,
                         WhiteShortCastling=nboard.white_short_castling,

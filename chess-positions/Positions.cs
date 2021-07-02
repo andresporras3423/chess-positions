@@ -714,7 +714,7 @@ namespace chess
                         tempCells = (string[,])cells.Clone();
                         tempCells[queen.y, queen.x] = "";
                         tempCells[nPosition.y, nPosition.x] = cells[queen.y, queen.x];
-                        if (!black_king_attacked(new Cell(king.y, king.x)))
+                        if (!white_king_attacked(new Cell(king.y, king.x)))
                         {
                             availableMovements.Add($"{piece},{queen.y},{queen.x},{piece},{nPosition.y},{nPosition.x},{cells[nPosition.y, nPosition.x]}");
                         }

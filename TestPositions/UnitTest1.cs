@@ -524,6 +524,28 @@ namespace TestPositions
             Assert.Contains("wq1,6,6,wq1,1,1,bq1", movements);
         }
 
+        [Test]
+        public void special_test()
+        {
+            clear_board(positions);
+            no_castling(positions);
+            positions.blackPieces["bk"] = new Cell(1, 3);
+            positions.blackPieces["bp1"] = new Cell(4, 1);
+            positions.blackPieces["bn1"] = new Cell(4, 7);
+            positions.blackPieces["br1"] = new Cell(6, 0);
+
+            positions.whitePieces["wq1"] = new Cell(0, 5);
+            positions.whitePieces["wb1"] = new Cell(1, 6);
+            positions.whitePieces["wn1"] = new Cell(2, 7);
+            positions.whitePieces["wp1"] = new Cell(4, 0);
+            positions.whitePieces["wr1"] = new Cell(5, 2);
+            positions.whitePieces["wk"] = new Cell(6, 5);
+            positions.setInitialBoard();
+            positions.tempCells = (string[,])positions.cells.Clone();
+            List<string> movements = positions.available_white_moves().ToList<string>();
+            Assert.AreEqual(6, movements.Count());
+        }
+
         public void no_castling(Positions position)
         {
             no_white_castling(position);

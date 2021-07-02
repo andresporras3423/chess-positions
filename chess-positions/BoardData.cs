@@ -13,7 +13,8 @@ namespace chess
     public class BoardData
     {
         public string pieces_position;
-        public int total_pieces;
+        public int total_black_pieces;
+        public int total_white_pieces;
         public bool black_long_castling;
         public bool black_short_castling;
         public bool white_long_castling;
@@ -22,7 +23,8 @@ namespace chess
         public int movements_available;
 
         public BoardData(string npieces_position,
-        int ntotal_pieces,
+        int ntotal_black_pieces,
+        int ntotal_white_pieces,
         bool nblack_long_castling,
         bool nblack_short_castling,
         bool nwhite_long_castling,
@@ -31,8 +33,9 @@ namespace chess
         int nmovements_available)
         {
             pieces_position= npieces_position;
-            total_pieces=ntotal_pieces;
-            black_long_castling= nblack_long_castling;
+            total_black_pieces=ntotal_black_pieces;
+            total_white_pieces = ntotal_white_pieces;
+            black_long_castling = nblack_long_castling;
             black_short_castling= nblack_short_castling;
             white_long_castling= nwhite_long_castling;
             white_short_castling= nwhite_short_castling;
@@ -44,7 +47,9 @@ namespace chess
             string print = "";
             print += $"" +
                 $"current board: {pieces_position}\n" +
-                $"pieces: {total_pieces}\n" +
+                $"total black pieces: {total_black_pieces}\n" +
+                $"total white pieces: {total_white_pieces}\n" +
+                $"total pieces: {total_black_pieces+total_white_pieces}\n" +
                 $"black long castling: {black_long_castling}\n" +
                 $"black short castling: {black_short_castling}\n" +
                 $"white long castling: {white_long_castling}\n" +

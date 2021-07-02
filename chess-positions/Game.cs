@@ -28,12 +28,9 @@ namespace chess
         public void next_white_move()
         {
             List<string> movements = positions.available_white_moves().ToList<string>();
+            if(is_game_finished(movements.Count()) == true) start_game();
             add_recent_board(movements.Count());
             print_last_board_info();
-            if (movements.Count() == 0 || positions.blackPieces.Keys.Count + positions.whitePieces.Keys.Count == 2)
-            {
-                start_game();
-            }
             Random rnd = new Random();
             int randomMovement = rnd.Next(movements.Count());
             string[] selectedMoveInfo = movements[randomMovement].Split(",");
@@ -70,12 +67,9 @@ namespace chess
         public void next_black_move()
         {
             List<string> movements = positions.available_black_moves().ToList<string>();
+            if (is_game_finished(movements.Count()) == true) start_game();
             add_recent_board(movements.Count());
             print_last_board_info();
-            if (movements.Count() == 0 || positions.blackPieces.Keys.Count + positions.whitePieces.Keys.Count == 2)
-            {
-                start_game();
-            }
             Random rnd = new Random();
             int randomMovement = rnd.Next(movements.Count());
             string[] selectedMoveInfo = movements[randomMovement].Split(",");
@@ -142,11 +136,22 @@ namespace chess
             return current_board;
         }
 
+        public bool is_game_finished(int total_movements)
+        {
+            if (total_movements == 0 || positions.blackPieces.Keys.Count + positions.whitePieces.Keys.Count == 2)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public void add_recent_board(int total_movements)
         {
+            
             BoardData bd = new BoardData(
                 give_current_board(),
-                positions.blackPieces.Keys.Count + positions.whitePieces.Keys.Count,
+                positions.blackPieces.Keys.Count,
+                positions.whitePieces.Keys.Count,
                 positions.black_long_castling,
                 positions.black_short_castling,
                 positions.white_long_castling,
