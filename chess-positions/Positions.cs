@@ -928,5 +928,88 @@ namespace chess
                 cells[whitePiece.Value.y, whitePiece.Value.x] = whitePiece.Key;
             }
         }
+
+        public void updateBoardDetailsAfterWhiteMovement(string lastMovement)
+        {
+            string[] selectedMoveInfo = lastMovement.Split(",");
+            if (selectedMoveInfo.Last() != "") // change of position with no capture
+            {
+                blackPieces.Remove(selectedMoveInfo.Last());
+            }
+            if (selectedMoveInfo[0] != selectedMoveInfo[3]) //promotion
+            {
+                whitePieces.Remove(selectedMoveInfo.First());
+                whitePieces[selectedMoveInfo[3]] = new Cell(Int32.Parse(selectedMoveInfo[4]), Int32.Parse(selectedMoveInfo[5]));
+                updateWhitePromotion(selectedMoveInfo[3]);
+            }
+            else if (selectedMoveInfo.Last() == "castling")
+            {
+                if (selectedMoveInfo[5] == "6") whitePieces["wr2"] = new Cell(7, 5);
+                else whitePieces["wr1"] = new Cell(7, 3);
+                white_short_castling = false;
+                white_long_castling = false;
+            }
+            if (selectedMoveInfo.First() == "wk")
+            {
+                white_short_castling = false;
+                white_long_castling = false;
+            }
+            else if (selectedMoveInfo.First() == "wr1") white_long_castling = false;
+            else if (selectedMoveInfo.First() == "wr2") white_short_castling = false;
+            if (selectedMoveInfo[4] == "0" && selectedMoveInfo[5] == "0") black_long_castling = false;
+            else if (selectedMoveInfo[4] == "0" && selectedMoveInfo[5] == "7") black_short_castling = false;
+            whitePieces[selectedMoveInfo[3]] = new Cell(Int32.Parse(selectedMoveInfo[4]), Int32.Parse(selectedMoveInfo[5]));
+            last_movement = lastMovement;
+        }
+
+        public void updateBoardDetailsAfterBlackMovement(string lastMovement)
+        {
+            string[] selectedMoveInfo = lastMovement.Split(",");
+            if (selectedMoveInfo.Last() != "") // change of position with no capture
+            {
+                whitePieces.Remove(selectedMoveInfo.Last());
+            }
+            if (selectedMoveInfo[0] != selectedMoveInfo[3]) //promotion
+            {
+                blackPieces.Remove(selectedMoveInfo.First());
+                blackPieces[selectedMoveInfo[3]] = new Cell(Int32.Parse(selectedMoveInfo[4]), Int32.Parse(selectedMoveInfo[5]));
+                updateBlackPromotion(selectedMoveInfo[3]);
+            }
+            else if (selectedMoveInfo.Last() == "castling") //castling
+            {
+                if (selectedMoveInfo[5] == "6") blackPieces["br2"] = new Cell(0, 5);
+                else blackPieces["br1"] = new Cell(0, 3);
+                black_short_castling = false;
+                black_long_castling = false;
+            }
+            if (selectedMoveInfo.First() == "bk")
+            {
+                black_short_castling = false;
+                black_long_castling = false;
+            }
+            else if (selectedMoveInfo.First() == "br1") black_long_castling = false;
+            else if (selectedMoveInfo.First() == "br2") black_short_castling = false;
+            if (selectedMoveInfo[4] == "7" && selectedMoveInfo[5] == "0") white_long_castling = false;
+            else if (selectedMoveInfo[4] == "7" && selectedMoveInfo[5] == "7") white_short_castling = false;
+            blackPieces[selectedMoveInfo[3]] = new Cell(Int32.Parse(selectedMoveInfo[4]), Int32.Parse(selectedMoveInfo[5]));
+            last_movement = lastMovement;
+        }
+
+        public void updateWhitePromotion(string whitePromoted)
+        {
+            if (Regex.Match(whitePromoted, @"^wq").Success) next_white_queen += 1;
+            else if (Regex.Match(whitePromoted, @"^wr").Success) next_white_rock += 1;
+            else if (Regex.Match(whitePromoted, @"^wb").Success) next_white_bishop += 1;
+            else next_white_knight += 1;
+        }
+
+        public void updateBlackPromotion(string blackPromoted)
+        {
+            if (Regex.Match(blackPromoted, @"^bq").Success) next_black_queen += 1;
+            else if (Regex.Match(blackPromoted, @"^br").Success) next_black_rock += 1;
+            else if (Regex.Match(blackPromoted, @"^bb").Success) next_black_bishop += 1;
+            else next_black_knight += 1;
+        }
+
     }
 }

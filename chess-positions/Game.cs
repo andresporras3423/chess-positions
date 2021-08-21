@@ -33,33 +33,8 @@ namespace chess
             print_last_board_info();
             Random rnd = new Random();
             int randomMovement = rnd.Next(movements.Count());
-            string[] selectedMoveInfo = movements[randomMovement].Split(",");
-            if (selectedMoveInfo.Last() != "") // change of position with no capture
-            {
-                positions.blackPieces.Remove(selectedMoveInfo.Last());
-            }
-            if (selectedMoveInfo[0] != selectedMoveInfo[3]) //promotion
-            {
-                positions.whitePieces.Remove(selectedMoveInfo.First());
-                positions.whitePieces[selectedMoveInfo[3]] = new Cell(Int32.Parse(selectedMoveInfo[4]), Int32.Parse(selectedMoveInfo[5]));
-                updateWhitePromotion(selectedMoveInfo[3]);
-            }
-            else if (selectedMoveInfo.Last() == "castling")
-            {
-                if (selectedMoveInfo[5] == "6") positions.whitePieces["wr2"] = new Cell(7, 5);
-                else positions.whitePieces["wr1"] = new Cell(7, 3);
-                positions.white_short_castling = false;
-                positions.white_long_castling = false;
-            }
-            if (selectedMoveInfo.First() == "wk")
-            {
-                positions.white_short_castling = false;
-                positions.white_long_castling = false;
-            }
-            else if (selectedMoveInfo.First() == "wr1") positions.white_long_castling = false;
-            else if (selectedMoveInfo.First() == "wr2") positions.white_short_castling = false;
-            positions.whitePieces[selectedMoveInfo[3]] = new Cell(Int32.Parse(selectedMoveInfo[4]), Int32.Parse(selectedMoveInfo[5]));
-            positions.last_movement = movements[randomMovement];
+            string lastMovement = movements[randomMovement];
+            positions.updateBoardDetailsAfterWhiteMovement(lastMovement);
             positions.setInitialBoard();
             next_black_move();
         }
@@ -72,51 +47,10 @@ namespace chess
             print_last_board_info();
             Random rnd = new Random();
             int randomMovement = rnd.Next(movements.Count());
-            string[] selectedMoveInfo = movements[randomMovement].Split(",");
-            if (selectedMoveInfo.Last() != "") // change of position with no capture
-            {
-                positions.whitePieces.Remove(selectedMoveInfo.Last());
-            }
-            if (selectedMoveInfo[0] != selectedMoveInfo[3]) //promotion
-            {
-                positions.blackPieces.Remove(selectedMoveInfo.First());
-                positions.blackPieces[selectedMoveInfo[3]] = new Cell(Int32.Parse(selectedMoveInfo[4]), Int32.Parse(selectedMoveInfo[5]));
-                updateBlackPromotion(selectedMoveInfo[3]);
-            }
-            else if (selectedMoveInfo.Last() == "castling") //castling
-            {
-                if (selectedMoveInfo[5] == "6") positions.whitePieces["br2"] = new Cell(0, 5);
-                else positions.whitePieces["br1"] = new Cell(0, 3);
-                positions.black_short_castling = false;
-                positions.black_long_castling = false;
-            }
-            if (selectedMoveInfo.First() == "bk")
-            {
-                positions.black_short_castling = false;
-                positions.black_long_castling = false;
-            }
-            else if (selectedMoveInfo.First() == "br1") positions.black_long_castling = false;
-            else if (selectedMoveInfo.First() == "br2") positions.black_short_castling = false;
-            positions.blackPieces[selectedMoveInfo[3]] = new Cell(Int32.Parse(selectedMoveInfo[4]), Int32.Parse(selectedMoveInfo[5]));
-            positions.last_movement = movements[randomMovement];
+            string lastMovement = movements[randomMovement];
+            positions.updateBoardDetailsAfterBlackMovement(lastMovement);
             positions.setInitialBoard();
             next_white_move();
-        }
-
-        public void updateWhitePromotion(string whitePromoted)
-        {
-            if (Regex.Match(whitePromoted, @"^wq").Success) positions.next_white_queen+=1;
-            else if (Regex.Match(whitePromoted, @"^wr").Success) positions.next_white_rock += 1;
-            else if (Regex.Match(whitePromoted, @"^wb").Success) positions.next_white_bishop += 1;
-            else positions.next_white_knight += 1;
-        }
-
-        public void updateBlackPromotion(string blackPromoted)
-        {
-            if (Regex.Match(blackPromoted, @"^bq").Success) positions.next_black_queen += 1;
-            else if (Regex.Match(blackPromoted, @"^br").Success) positions.next_black_rock += 1;
-            else if (Regex.Match(blackPromoted, @"^bb").Success) positions.next_black_bishop += 1;
-            else positions.next_black_knight += 1;
         }
 
         public string give_current_board()
